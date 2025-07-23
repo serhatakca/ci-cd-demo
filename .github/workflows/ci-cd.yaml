@@ -25,15 +25,16 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
+          context: .
           push: true
           tags: serhatakca/ci-cd-demo:latest
 
-      - name: Set up kubectl
+      - name: Set up Kubeconfig
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
 
-      - name: Deploy to Kubernetes cluster
+      - name: Deploy to Kubernetes
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
