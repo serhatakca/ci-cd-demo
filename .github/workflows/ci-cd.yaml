@@ -26,11 +26,10 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile
           push: true
           tags: serhatakca/ci-cd-demo:latest
 
-      - name: Set up Kubeconfig
+      - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
