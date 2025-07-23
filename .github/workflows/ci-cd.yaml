@@ -28,7 +28,7 @@ jobs:
           push: true
           tags: serhatakca/ci-cd-demo:latest
 
-      - name: Set up kubectl
+      - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
@@ -38,6 +38,6 @@ jobs:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
           mkdir -p $HOME/.kube
-          echo "$KUBECONFIG" | base64 --decode > $HOME/.kube/config
+          echo "$KUBECONFIG" | base64 --decode | tee $HOME/.kube/config > /dev/null
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
